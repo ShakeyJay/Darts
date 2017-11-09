@@ -30,19 +30,16 @@ console.log(publicPath);
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
+//var io = require('socket.io').listen(server);
 
 app.use(express.static(publicPath));
-//colossus
-/*
-server.listen(port, "10.22.89.205",  () => {
-  console.log(`Started on port ${port}`);
-});
-/**/
+
 server.listen(port, () => {
   console.log(`Started on port ${port}`);
 });
 
 io.on('connection', (socket) => {
+    socket.emit('test', "whoop");
     console.log('connection');
     socket.on('generateMap', (map, callback) => {
         console.log(map.message);
